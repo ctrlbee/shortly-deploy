@@ -100,7 +100,7 @@ module.exports = function(grunt) {
          cmd: 'grunt',
          grunt: true,
          args: 'nodemon'
-    });
+    });  
     nodemon.stdout.pipe(process.stdout);
     nodemon.stderr.pipe(process.stderr);
 
@@ -115,7 +115,7 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build',['test', 'cssmin', 'jshint', 'concat', 'uglify']);
+  grunt.registerTask('build',['cssmin', 'jshint', 'concat', 'uglify']);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
