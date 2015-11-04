@@ -3,6 +3,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      // options: {
+      //   separator: ';'
+      // },
+      target: {
+        src: ['public/client/*.js'],
+        dest: 'dist/<%= pkg.name %>.js'
+      }
     },
 
     mochaTest: {
@@ -21,11 +28,19 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      target: {
+        files: {
+          'dist/<%= pkg.name %>.min.js': ['<%= concat.target.dest %>']
+        }
+      }
     },
 
     jshint: {
       files: [
-        // Add filespec list here
+        'public/client/*.js', 'app/**/*.js'
       ],
       options: {
         force: 'true',
@@ -38,7 +53,11 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-        // Add filespec list here
+      target: {
+        files: {
+          'dist/style.min.css' : ['public/style.css']
+        }
+      }
     },
 
     watch: {
@@ -74,6 +93,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('server-dev', function (target) {
+    console.log(target);    
+
     // Running nodejs in a different process and displaying output on the main console
     var nodemon = grunt.util.spawn({
          cmd: 'grunt',
@@ -94,8 +115,7 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [
-  ]);
+  grunt.registerTask('build',['test', 'cssmin', 'jshint', 'concat', 'uglify']);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
