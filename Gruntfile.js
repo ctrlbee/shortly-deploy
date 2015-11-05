@@ -78,6 +78,10 @@ module.exports = function(grunt) {
     },
 
     shell: {
+      options: {
+        stdout: true, 
+        stderr: true
+      },
       gitAdd: {
         command: 'git add -A'
       },
@@ -133,18 +137,16 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', function(){
-    grunt.util.spawn({
+    var shell = grunt.util.spawn({
       cmd: 'grunt', 
       grunt: true, 
       args: 'shell'
     });
 
-    //shell.stdout.pipe(process.stdout); 
-    //shell.stderr.pipe(process.stderr); 
+    shell.stdout.pipe(process.stdout); 
+    shell.stderr.pipe(process.stderr); 
 
     //grunt.task.run(['upload']);
   }); 
 };
-
-
 
