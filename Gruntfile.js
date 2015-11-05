@@ -132,7 +132,19 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('deploy', [ 'upload --prod' ]);
+  grunt.registerTask('deploy', function(){
+    var shell = grunt.util.spawn({
+      cmd: 'grunt', 
+      grunt: true, 
+      args: 'shell'
+    })
 
+    shell.stdout.pipe(process.stdout); 
+    shell.stderr.pipe(process.stderr); 
 
+    //grunt.task.run(['upload']);
+  }); 
 };
+
+
+
