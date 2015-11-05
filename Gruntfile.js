@@ -129,24 +129,27 @@ module.exports = function(grunt) {
   grunt.registerTask('build',['cssmin', 'jshint', 'concat', 'uglify']);
 
   grunt.registerTask('upload', function(n) {
-    if(grunt.option('prod')) {
+    if(grunt.option('prod') || n === 'prod') {
       grunt.task.run(['shell']); 
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
   });
 
-  grunt.registerTask('deploy', function(){
-    var shell = grunt.util.spawn({
-      cmd: 'grunt', 
-      grunt: true, 
-      args: 'shell'
-    });
+  grunt.registerTask('deploy', ['build', 'test', 'upload:prod']); 
 
-    shell.stdout.pipe(process.stdout); 
-    shell.stderr.pipe(process.stderr); 
+  //   function(){
+  //   // var shell = grunt.util.spawn({
+  //   //   cmd: 'grunt', 
+  //   //   grunt: true, 
+  //   //   args: 'shell'
+  //   // });
 
-    //grunt.task.run(['upload']);
-  }); 
+  //   // shell.stdout.pipe(process.stdout); 
+  //   // shell.stderr.pipe(process.stderr); 
+
+  //   //grunt.task.run(['upload']);
+  // }); 
+  // }
 };
 
