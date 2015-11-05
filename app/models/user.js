@@ -48,8 +48,4 @@ User.prototype.comparePassword = function(attemptedPassword, callback) {
   });
 };
 
-
-
-
-
 module.exports = User;
