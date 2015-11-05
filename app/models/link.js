@@ -16,20 +16,23 @@ var crypto = require('crypto');
 //   }
 // });
 
-var Link = db.Schema({
-  url: String,
-  base_url: String,
-  code: String,
-  title: String,
-  visits: Number
+var schema = db.Schema({
+  url: 'string',
+  base_url: 'string',
+  code: 'string',
+  title: 'string',
+  visits: 'number'
 });
 
-Link.pre('save', function(next) {
+schema.pre('save', function(next) {
   var shasum = crypto.createHash('sha1');
   shasum.update(this.url);
   this.code = shasum.digest('hex').slice(0, 5);
   next();
 });
+
+var Link = db.model('Link', schema);
+
 
 
 module.exports = Link;

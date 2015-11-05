@@ -1,12 +1,12 @@
-var Bookshelf = require('bookshelf');
-var path = require('path');
+// var Bookshelf = require('bookshelf');
+// var path = require('path');
 
 var path = require('path');
 var mongoose = require('mongoose');
 
 var db = mongoose.connect('mongodb://localhost:27017/shortly');
 
-module.exports = db.connection;
+module.exports = db;
 
 
 // var db = Bookshelf.initialize({
@@ -50,4 +50,4 @@ module.exports = db.connection;
 //   }
 // });
 
-module.exports = db;
+// module.exports = db;
