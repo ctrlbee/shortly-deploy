@@ -21,7 +21,8 @@ var schema = db.Schema({
   base_url: 'string',
   code: 'string',
   title: 'string',
-  visits: 'number'
+  visits: 'number', 
+  userid: 'string'
 });
 
 schema.pre('save', function(next) {

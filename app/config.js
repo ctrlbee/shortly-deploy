@@ -4,7 +4,9 @@
 var path = require('path');
 var mongoose = require('mongoose');
 
-var db = mongoose.connect('mongodb://localhost:27017/shortly');
+//var db = mongoose.connect('mongodb://localhost:27017/shortly');
+
+var db = mongoose.connect('mongodb://admin:hr34@ds051863.mongolab.com:51863/shortly');
 
 module.exports = db;
 
